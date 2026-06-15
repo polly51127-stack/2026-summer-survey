@@ -129,14 +129,26 @@ const DEFAULT_CONFIG = {
 let pool;
 let initialized = false;
 
+function getDatabaseUrl() {
+  return (
+    process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.POSTGRES_PRISMA_URL ||
+    process.env.POSTGRES_URL_NON_POOLING ||
+    process.env.STORAGE_URL ||
+    ""
+  );
+}
+
 function getPool() {
-  if (!process.env.DATABASE_URL) {
-    throw new Error("DATABASE_URL 尚未設定。請先在 Vercel 專案連接 Postgres 資料庫。");
+  const databaseUrl = getDatabaseUrl();
+  if (!databaseUrl) {
+    throw new Error("資料庫連線尚未設定。請先在 Vercel 專案連接 Postgres 資料庫。");
   }
   if (!pool) {
     pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: process.env.DATABASE_URL.includes("localhost")
+      connectionString: databaseUrl,
+      ssl: databaseUrl.includes("localhost")
         ? false
         : { rejectUnauthorized: false }
     });
