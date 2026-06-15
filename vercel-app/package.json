@@ -1,0 +1,16 @@
+{
+  "name": "summer-survey-vercel",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "vercel dev",
+    "check": "node --check api/server.js && node --check app.js && node --check admin.js && node --check print.js"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "pg": "^8.13.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
