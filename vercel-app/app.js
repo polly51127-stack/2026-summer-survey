@@ -33,7 +33,6 @@ function renderHero() {
   return `
     <section class="hero">
       <div class="hero-content">
-        <p class="hero-kicker">VIA Summer Gathering Survey</p>
         <h1>${escapeHtml(config.title)}</h1>
         <p class="hero-description">${escapeHtml(config.description)}</p>
       </div>
